@@ -1,18 +1,10 @@
-from django.shortcuts import render
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .models import Profiles, Sessions, Cameras, Videos, VideoClips
-from .serializers import ProfilesSerializer, SessionsSerializer, CamerasSerializer, VideosSerializer, VideoClipsSerializer
+from api.models import Profiles
+from api.serializers import ProfilesSerializer
 
-
-@api_view(['GET'])
-def welcome(request):
-    return Response({'msg': 'API working.'})
-
-
-##### profiles #####
 # get all profiles
 @api_view(['GET'])
 def profiles(request):
@@ -48,7 +40,7 @@ def updateProfile(request, pk):
 
     return Response(serializer.data)
 
-# remove a profile
+# delete a profile
 @api_view(['DELETE'])
 def deleteProfile(request, pk):
     profile = Profiles.objects.get(id=pk)
@@ -56,15 +48,9 @@ def deleteProfile(request, pk):
 
     return Response('Profile was deleted')
 
-# remove all profiles
+# delete all profiles
 @api_view(['DELETE'])
 def deleteProfiles(request):
     Profiles.objects.all().delete()
 
     return Response('All Profiles were deleted')
-
-
-##### sessions #####
-
-
-
