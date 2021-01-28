@@ -1,0 +1,41 @@
+{
+  "name": "csaatvideoupload",
+  "version": "1.0.0",
+  "description": "video upload tool in CSAAT project. This is not final repo, just a repo for development.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --mode development --watch --entry ./upload_tool/frontend/src/index.js --output-path ./upload_tool/frontend/static/frontend",
+    "build": "webpack --mode production --entry ./upload_tool/frontend/src/index.js --output-path ./upload_tool/frontend/static/frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SachinAthu/CSAAT-video-upload.git"
+  },
+  "author": "sachinAthu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SachinAthu/CSAAT-video-upload/issues"
+  },
+  "homepage": "https://github.com/SachinAthu/CSAAT-video-upload#readme",
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "css-loader": "^5.0.1",
+    "style-loader": "^2.0.0",
+    "svg-url-loader": "^7.1.1",
+    "webpack": "^5.18.0",
+    "webpack-cli": "^4.4.0"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}

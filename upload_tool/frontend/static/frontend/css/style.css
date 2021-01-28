@@ -1,0 +1,83 @@
+/*
+
+font-family: 'Open Sans', sans-serif;
+font-family: 'Poppins', sans-serif;
+font-family: 'Raleway', sans-serif;
+
+*/
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-primary: #007bff;
+  --color-secondary: #f9f9fa;
+  --color-secondary-dark: #f3f8ff;
+
+  --color-warning: #ffc107;
+  --color-danger: #dc3545;
+  --color-green: #28a745;
+  --color-green-dark: #269b41;
+  --color-teal: #20c997;
+  --color-info: #17a2b8;
+
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+}
+
+html {
+  /* 1rem = 16px */
+  font-size: 100%;
+}
+
+body {
+  min-height: 100vh;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+  /* background: linear-gradient(
+    to bottom,
+    var(--color-secondary),
+    var(--color-secondary-dark)
+  ); */
+  background-color: var(--color-secondary);
+}
+
+/* headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Raleway", sans-serif;
+}
+
+/* buttons */
+button {
+  font-family: 'Raleway', sans-serif;
+  display: inline-block;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.5s;
+  border-radius: 5px;
+}
+
+button:focus{
+  border: none;
+  outline: none;
+  text-decoration: none;
+}
+
+/* input fields  */
+
+/* selection and scroll bar  */

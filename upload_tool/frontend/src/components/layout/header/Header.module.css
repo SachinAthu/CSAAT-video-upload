@@ -1,0 +1,159 @@
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  margin-bottom: 100px;
+  z-index: 997;
+  transition: all 0.5s;
+  padding: 15px 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.container_scrolled {
+  background: #fff;
+  box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.1);
+}
+
+.container nav {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.container ul {
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+}
+
+.li1 {
+  display: flex;
+  align-items: center;
+  float: left;
+}
+
+/* .container a{
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    font-size: 0.938rem;
+    font-weight: 400;
+    margin-left: 5px;
+    color: rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+
+} */
+
+.heading {
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: rgba(0, 0, 0, 0.9);
+  cursor: pointer;
+}
+
+.heading2 {
+  font-size: 0.938rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-left: 5px;
+  color: rgba(0, 0, 0, 0.8);
+  transform: translateY(4px);
+}
+
+.adminlink {
+  margin-left: auto;
+  padding: 0 8px;
+}
+
+.adminlink a {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  background-color: rgba(0, 123, 255, 0.9);
+  color: #fff;
+  box-shadow: 0 0 5px 0 rgba(0, 123, 255, 0.9);
+  padding: 5px 10px;
+  text-transform: uppercase;
+  transition: all 0.5s;
+  border-radius: 5px;
+}
+
+.adminlink a:hover {
+  background-color: rgba(0, 123, 255, 1);
+}
+
+.userlink {
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.938rem;
+  font-weight: 400;
+  margin-left: 5px;
+  color: rgba(0, 0, 0, 0.6);
+  padding: 0 0 0 8px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.userlink:hover .userlink_span {
+  color: var(--color-primary);
+}
+
+.userlink:hover .userlink_svg {
+  fill: var(--color-primary);
+}
+
+.userlink svg {
+  fill: rgba(0, 0, 0, 0.8);
+  transform: scale(0.8);
+  margin-left: 1px;
+}
+
+.dropdown {
+  display: none;
+  width: 170px;
+  position: absolute;
+  top: 35px;
+  right: -20px;
+  padding: 10px 22px;
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.3);
+  z-index: 997;
+  animation-name: show;
+  animation-duration: 0.5s;
+}
+
+.show {
+  display: block;
+}
+
+.dropdown div {
+  cursor: pointer;
+  padding: 4px 0;
+  margin: 0 auto;
+}
+
+.dropdown hr {
+  margin: 6px 0;
+}
+
+.dropdown span:hover {
+  color: var(--color-primary);
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
