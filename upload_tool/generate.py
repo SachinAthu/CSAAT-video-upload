@@ -32,5 +32,5 @@ def add_profiles(n = 50):
 
 if __name__ == '__main__':
     print('generating data')
-    add_profiles(10)
+    add_profiles(30)
     print('generation complete')

@@ -16,15 +16,19 @@ font-family: 'Raleway', sans-serif;
 
 :root {
   --color-primary: #007bff;
+  --color-primary-light: rgba(0, 123, 255, 0.2);
+  --color-primary-dark: #086ad3;
   --color-secondary: #f9f9fa;
   --color-secondary-dark: #f3f8ff;
 
   --color-warning: #ffc107;
   --color-danger: #dc3545;
+  --color-danger-light: rgba(220, 53, 70, 0.2);
   --color-green: #28a745;
   --color-green-dark: #269b41;
   --color-teal: #20c997;
   --color-info: #17a2b8;
+  --color-input: #495057;
 
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
@@ -61,15 +65,15 @@ h6 {
 }
 
 /* buttons */
-button {
-  font-family: 'Raleway', sans-serif;
+button{
+  font-family: "Raleway", sans-serif;
   display: inline-block;
   border: none;
   outline: none;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.5s;
-  border-radius: 5px;
+  border-radius: 3px;
 }
 
 button:focus{
@@ -78,6 +82,52 @@ button:focus{
   text-decoration: none;
 }
 
+
+
 /* input fields  */
+input[type="text"],
+input[type="date"],
+input[type="file"] {
+  height: 36px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  padding: 6px 15px;
+  border: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  border-radius: 3px;
+  color: var(--color-input);
+  transition: all 0.3s ease-in-out;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="file"]:focus {
+  border: 1px solid rgba(0, 123, 255, 0.5) !important;
+}
+
+form label{
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* table  */
+th {
+  font-size: 0.75em;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 560;
+  padding: 0px 0 0 0;
+}
+
+td{
+  font-size: 0.85em;
+  color: rgba(0, 0, 0, 0.7);
+  font-weight: 560;
+  padding: 0px 0 0 0;
+}
+
+tr{
+  z-index: 100;
+}
 
 /* selection and scroll bar  */

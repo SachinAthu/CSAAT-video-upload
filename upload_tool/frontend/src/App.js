@@ -1,26 +1,40 @@
-import React, { Component, Fragment } from 'react'
-import ReactDOM from 'react-dom'
+import React, { Component, Fragment } from "react";
+import ReactDOM from "react-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import {Provider} from "react-redux";
 
-import styles from './App.module.css'
-import Header from './components/layout/header/Header'
-import Footer from './components/layout/footer/Footer'
+import styles from "./App.module.css";
+import Header from "./components/layout/header/Header";
+import Footer from "./components/layout/footer/Footer";
+import Profiles from "./components/profiles/Profiles";
+import store from "./store";
+import ProfilePage from './components/profilePage/ProfilePage'
 
 class App extends Component {
-    render(){
-        return (
+  render() {
+    return (
+      <Provider store={store}>
+        <Router>
+          <Fragment>
             <div className={styles.container}>
-                <div className={styles.header}>
-                    <Header />
-                </div>
+              <div className={styles.header}>
+                <Header />
+              </div>
 
-                <div className={styles.content}>
-                    content
-                </div>
+              <div className={styles.content}>
+                <Switch>
+                  <Route exact path="/" component={Profiles} />
+                  <Route exact path="/profile_detail" component={ProfilePage}/>
+                </Switch>
+              </div>
 
-                <Footer />
+              <Footer />
             </div>
-        )
-    }
+          </Fragment>
+        </Router>
+      </Provider>
+    );
+  }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'))
+ReactDOM.render(<App />, document.getElementById("app"));

@@ -22,7 +22,7 @@ class Header extends Component {
     });
 
     $(window).scroll(function () {
-      if ($(this).scrollTop() > 100) {
+      if ($(this).scrollTop() > 45) {
         $("#container").addClass(`${styles.container_scrolled}`);
       } else {
         $("#container").removeClass(`${styles.container_scrolled}`);

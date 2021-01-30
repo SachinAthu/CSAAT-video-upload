@@ -8,7 +8,7 @@ from api.serializers import ProfilesSerializer
 # get all profiles
 @api_view(['GET'])
 def profiles(request):
-    profile_list = Profiles.objects.all().order_by('clinic_no')
+    profile_list = Profiles.objects.all().order_by('-id')
     serializer = ProfilesSerializer(profile_list, many=True)
     return Response(serializer.data)
 

@@ -1,11 +1,13 @@
 .container{
+    position: relative;
     width: 100%;
 }
 
 .header{
-    margin-bottom: 142px;
+    margin-bottom: 118px;
 }
 
 .content{
-    height: 110vh;
+    width: 1140px;
+    margin: 0 auto 100px auto;
 }

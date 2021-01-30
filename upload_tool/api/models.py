@@ -7,7 +7,7 @@ class Profiles(models.Model):
     name = models.CharField(max_length=200, blank=False, null=False)
     dob = models.DateField(auto_now=False, auto_now_add=False, blank=True, null=True)
     sex = models.CharField(max_length=20, blank=True, null=True)
-    consent_doc = models.FileField(upload_to='consent_docs', max_length=100, blank=True, null=True)
+    consent_doc = models.FileField(upload_to='consent_docs', max_length=100, blank=True, null=True, default='')
 
     def __str__(self):
         return self.name
