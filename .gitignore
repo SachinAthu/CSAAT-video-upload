@@ -39,6 +39,8 @@ coverage/
 # in case we run shippable tests don't include it
 shippable/
 
+media/
+
 # JPEG
 *.jpg
 *.jpeg
