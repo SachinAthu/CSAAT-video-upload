@@ -34,6 +34,24 @@ export default function (state = initialState, action) {
       };
 
     case UPDATE_PROFILE:
+      const tempProfiles = [...state.profiles]
+      const updatedProfile = action.data
+
+      tempProfiles.forEach((p, i) => {
+        if(p.id === updatedProfile.id){
+          p.clinic_no = updatedProfile.clinic_no
+          p.name = updatedProfile.name
+          p.dob = updatedProfile.dob
+          p.sex = updatedProfile.sex
+          p.consent_doc = updatedProfile.consent_doc
+          p.consent_doc_name = updatedProfile.consent_doc_name
+        }
+      })
+
+      return {
+        ...state,
+        profiles: tempProfiles
+      }
 
     case DELETE_PROFILE:
       return {

@@ -16,18 +16,20 @@ font-family: 'Raleway', sans-serif;
 
 :root {
   --color-primary: #007bff;
-  --color-primary-light: rgba(0, 123, 255, 0.2);
+  --color-primary-light: rgba(0, 123, 255, 0.1);
   --color-primary-dark: #086ad3;
   --color-secondary: #f9f9fa;
   --color-secondary-dark: #f3f8ff;
 
   --color-warning: #ffc107;
   --color-danger: #dc3545;
-  --color-danger-light: rgba(220, 53, 70, 0.2);
-  --color-green: #28a745;
+  --color-danger-light: rgba(220, 53, 70, 0.1);
+  --color-green: rgba(40, 167, 70, 1);
+  --color-green-light: rgba(40, 167, 70, 0.1);
   --color-green-dark: #269b41;
   --color-teal: #20c997;
-  --color-info: #17a2b8;
+  --color-info: rgb(23, 162, 184);
+  --color-info-dark: rgb(21, 147, 167);
   --color-input: #495057;
 
   --breakpoint-xs: 0;
@@ -43,7 +45,6 @@ html {
 }
 
 body {
-  min-height: 100vh;
   box-sizing: border-box;
   font-family: "Open Sans", sans-serif;
   /* background: linear-gradient(
@@ -87,12 +88,11 @@ button:focus{
 /* input fields  */
 input[type="text"],
 input[type="date"],
-input[type="file"] {
+input[type="file"]{
   height: 36px;
   font-size: 0.75rem;
   font-weight: 400;
   padding: 6px 15px;
-  border: rgba(0, 0, 0, 0.8);
   border: 1px solid rgba(0, 0, 0, 0.1) !important;
   border-radius: 3px;
   color: var(--color-input);
@@ -101,12 +101,42 @@ input[type="file"] {
 
 input[type="text"]:focus,
 input[type="date"]:focus,
-input[type="file"]:focus {
+input[type="file"]:focus{
   border: 1px solid rgba(0, 123, 255, 0.5) !important;
 }
 
+select {
+  display: block;
+  height: 36px;
+	font-size: 0.75rem;
+	font-weight: 400;
+	color: var(--color-input);
+	line-height: 1.3;
+	padding: 6px 15px;
+	box-sizing: border-box;
+	border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  border-radius: 3px;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+	background-color: #fff;
+}
+select::-ms-expand {
+	display: none;
+}
+select:hover {
+	border-color: #888;
+}
+select:focus {
+	border: 1px solid rgba(0, 123, 255, 0.5) !important;
+	outline: none;
+}
+select option {
+	font-weight:400;
+}
+
 form label{
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.6);
 }
@@ -116,7 +146,6 @@ th {
   font-size: 0.75em;
   color: rgba(0, 0, 0, 0.5);
   font-weight: 560;
-  padding: 0px 0 0 0;
 }
 
 td{

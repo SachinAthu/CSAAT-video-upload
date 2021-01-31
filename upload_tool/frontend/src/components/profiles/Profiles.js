@@ -25,7 +25,8 @@ export class Profiles extends Component {
     super(props);
     this.state = {
       searchVal: "",
-      adding: false,
+      addOrEdit: false,
+      editProfile: null,
     };
   }
 
@@ -35,7 +36,7 @@ export class Profiles extends Component {
 
   fetchProfiles = () => {
     axios
-      .get("/api/profiles/")
+      .get("profiles/")
       .then((res) => {
         // console.log(res.data)
         this.props.getProfiles(res.data);
@@ -58,7 +59,7 @@ export class Profiles extends Component {
     // console.log(id);
 
     axios
-      .delete(`/api/delete-profile/${id}`)
+      .delete(`delete-profile/${id}`)
       .then((res) => {
         console.log(res.data);
         this.props.deleteProfile(id);
@@ -78,16 +79,23 @@ export class Profiles extends Component {
 
   addProfileHandler = () => {
     this.setState({
-      adding: true,
+      addOrEdit: true,
+    });
+  };
+
+  editHandler = (profile) => {
+    this.setState({
+      editProfile: profile,
+      addOrEdit: true,
     });
   };
 
   closeAddingWindow = () => {
-    this.setState({ adding: false });
+    this.setState({ addOrEdit: false, editProfile: null });
   };
 
   render() {
-    const { searchVal, adding } = this.state;
+    const { searchVal, addOrEdit, editProfile } = this.state;
     const profiles = this.props.profiles;
 
     return (
@@ -144,6 +152,7 @@ export class Profiles extends Component {
                 <th>CHILD NAME</th>
                 <th>DATE OF BIRTH</th>
                 <th>GENDER</th>
+                <th>CONSENT DOC</th>
                 <th></th>
               </tr>
             </thead>
@@ -156,6 +165,20 @@ export class Profiles extends Component {
                   <td>{profile.dob}</td>
                   <td>{profile.sex}</td>
                   <td>
+                    {profile.consent_doc ? (
+                      <a
+                        className={styles.viewDocbtn}
+                        href={profile.consent_doc}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        View
+                      </a>
+                    ) : (
+                      "-"
+                    )}
+                  </td>
+                  <td>
                     <button
                       className={styles.viewbtn}
                       onClick={this.toProfileHandler.bind(this, profile)}
@@ -167,7 +190,24 @@ export class Profiles extends Component {
                         height="32"
                         viewBox="0 0 32 32"
                       >
+                        <title>Go to Details</title>
                         <path d="M19.414 27.414l10-10c0.781-0.781 0.781-2.047 0-2.828l-10-10c-0.781-0.781-2.047-0.781-2.828 0s-0.781 2.047 0 2.828l6.586 6.586h-19.172c-1.105 0-2 0.895-2 2s0.895 2 2 2h19.172l-6.586 6.586c-0.39 0.39-0.586 0.902-0.586 1.414s0.195 1.024 0.586 1.414c0.781 0.781 2.047 0.781 2.828 0z"></path>
+                      </svg>
+                    </button>
+
+                    <button
+                      className={styles.editbtn}
+                      onClick={this.editHandler.bind(this, profile)}
+                    >
+                      <svg
+                        version="1.1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                      >
+                        <title>Edit</title>
+                        <path d="M20.719 7.031l-1.828 1.828-3.75-3.75 1.828-1.828q0.281-0.281 0.703-0.281t0.703 0.281l2.344 2.344q0.281 0.281 0.281 0.703t-0.281 0.703zM3 17.25l11.063-11.063 3.75 3.75-11.063 11.063h-3.75v-3.75z"></path>
                       </svg>
                     </button>
 
@@ -193,7 +233,9 @@ export class Profiles extends Component {
           </table>
         </div>
 
-        {adding ? <AddProfile close={this.closeAddingWindow} /> : null}
+        {addOrEdit ? (
+          <AddProfile close={this.closeAddingWindow} profile={editProfile} />
+        ) : null}
       </div>
     );
   }

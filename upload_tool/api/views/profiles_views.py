@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from django.core.files.storage import default_storage
 
 from api.models import Profiles
 from api.serializers import ProfilesSerializer
@@ -26,6 +27,7 @@ def addProfile(request):
 
     if serializer.is_valid():
         serializer.save()
+        print(serializer.data)
 
     return Response(serializer.data)
 
@@ -34,9 +36,31 @@ def addProfile(request):
 def updateProfile(request, pk):
     profile = Profiles.objects.get(id=pk)
     serializer = ProfilesSerializer(data=request.data, instance=profile)
+    
+    doc = profile.consent_doc
+    doc_name = profile.consent_doc_name
+
+    if serializer.is_valid():
+        print('serializer valid')
+    else:
+        print('serializer not valid')
+
+    if doc and request.FILES.get('consent_doc'):
+        print('override')
+        # delete previous file
+        if default_storage.exists(doc.path):
+            default_storage.delete(doc.path)
+
+    if doc and request.FILES.get('consent_doc') is None:
+        # do not remove previous file
+        print(request.data)
+        if default_storage.exists(doc.path):
+            file = default_storage.open(doc.path, mode='rb')
 
     if serializer.is_valid():
         serializer.save()
+    else:
+        print(serializer.errors)
 
     return Response(serializer.data)
 
@@ -44,6 +68,11 @@ def updateProfile(request, pk):
 @api_view(['DELETE'])
 def deleteProfile(request, pk):
     profile = Profiles.objects.get(id=pk)
+
+    if profile.consent_doc:
+        if default_storage.exists(profile.consent_doc.path):
+            default_storage.delete(profile.consent_doc.path)
+
     profile.delete()
 
     return Response('Profile was deleted')
@@ -51,6 +80,12 @@ def deleteProfile(request, pk):
 # delete all profiles
 @api_view(['DELETE'])
 def deleteProfiles(request):
-    Profiles.objects.all().delete()
+    profiles = Profiles.objects.all()
+
+    for p in profiles:
+        if p.consent_doc:
+            if default_storage.exists(p.consent_doc.path):
+                default_storage.delete(path)
+        p.delete()
 
     return Response('All Profiles were deleted')

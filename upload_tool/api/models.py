@@ -7,7 +7,8 @@ class Profiles(models.Model):
     name = models.CharField(max_length=200, blank=False, null=False)
     dob = models.DateField(auto_now=False, auto_now_add=False, blank=True, null=True)
     sex = models.CharField(max_length=20, blank=True, null=True)
-    consent_doc = models.FileField(upload_to='consent_docs', max_length=100, blank=True, null=True, default='')
+    consent_doc = models.FileField(upload_to='consent_docs', max_length=100, blank=True, null=True)
+    consent_doc_name = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -20,7 +21,7 @@ class Sessions(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='sessions')
 
     def __str__(self):
-        return self.datetime
+        return str(self.datetime)
 
 
 # cameras
@@ -35,8 +36,8 @@ class Cameras(models.Model):
 
 # all uploaded videos
 class Videos(models.Model):
-    profile = models.ForeignKey(Profiles, on_delete=models.CASCADE, null=True, related_name='videos')
-    session = models.ForeignKey(Sessions, on_delete=models.CASCADE, null=True, related_name='videos')
+    profile = models.ForeignKey(Profiles, on_delete=models.CASCADE, null=False, related_name='videos', default='')
+    session = models.ForeignKey(Sessions, on_delete=models.CASCADE, null=False, related_name='videos', default='')
     camera = models.ForeignKey(Cameras, on_delete=models.CASCADE, null=True, related_name='videos')
     name = models.CharField(max_length=200, blank=False, null=False)
     description = models.CharField(max_length=1000, blank=True, null=True)

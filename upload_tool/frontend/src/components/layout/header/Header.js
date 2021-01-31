@@ -1,11 +1,14 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import styles from "./Header.module.css";
-import logo from "../../../../static/frontend/img/logo.png";
 
 class Header extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      redirect: false,
+    };
   }
 
   componentDidMount() {
@@ -16,7 +19,7 @@ class Header extends Component {
           $(e.target).parents("#dropdown").length
         ) {
         } else {
-          $('#dropdown').removeClass(`${styles.show}`);
+          $("#dropdown").removeClass(`${styles.show}`);
         }
       }
     });
@@ -54,20 +57,36 @@ class Header extends Component {
   };
 
   render() {
+    {
+      this.state.redirect ? <Redirect to="/" /> : null;
+    }
+
     return (
       <header className={styles.container} id="container">
         <nav>
           <ul>
             <li className={styles.li1}>
-              <span className={styles.heading}>CSAAT</span>
+              <Link to="/" style={{ textDecoration: "none" }}>
+                <span className={styles.heading}>CSAAT</span>
+              </Link>
             </li>
 
             <li className={styles.li1}>
-              <span className={styles.heading2}>Video Uploader</span>
+              <Link to="/" style={{ textDecoration: "none" }}>
+                <span className={styles.heading2} onClick={this.goHomePage}>
+                  Video Uploader
+                </span>
+              </Link>
             </li>
 
             <li className={`${styles.adminlink} ${styles.li1}`}>
-              <a href="#">Admin panel</a>
+              <a
+                href="http://localhost:8000/admin"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Admin panel
+              </a>
             </li>
 
             <li className={`${styles.userlink} ${styles.li1}`}>

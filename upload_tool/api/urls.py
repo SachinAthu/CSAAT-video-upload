@@ -12,7 +12,7 @@ urlpatterns = [
     path('delete-profile/<str:pk>/', deleteProfile, name='delete-profile'),
     path('delete-profiles/', deleteProfiles, name='delete-profiles'),
 
-    path('sessions/', sessions, name='sessions'),
+    path('sessions/<str:pk>/', sessions, name='sessions'),
     path('session/<str:pk>/', session, name='session'),
     path('add-session/', addSession, name='add-session'),
     path('delete-session/<str:pk>/', deleteSession, name='delete-session'),
@@ -25,13 +25,13 @@ urlpatterns = [
     path('delete-camera/<str:pk>/', deleteCamera, name='delete-camera'),
     path('delete-cameras/', deleteCameras, name='delete-cameras'),
 
-    path('videos/<str:pk>', sessionVideos, name='session-videos'),
+    path('videos/<str:pk>/', sessionVideos, name='session-videos'),
     path('add-video/', addVideo, name='add-video'),
     path('update-video/<str:pk>/', updateVideo, name='update-video'),
     path('delete-video/<str:pk>/', deleteVideo, name='delete-video'),
     path('delete-videos/', deleteVideos, name='delete-videos'),
 
-    path('video-clips/<str:pk>', videoClips, name='profiles'),
+    path('video-clips/<str:pk>/', videoClips, name='profiles'),
     path('add-video-clip/', addVideoClip, name='add-video-clip'),
     path('delete-video-clip/<str:pk>/', deleteVideoClip, name='delete-video-clip'),
     path('delete-video-clips/', deleteVideoClips, name='delete-video-clips'),

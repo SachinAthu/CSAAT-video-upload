@@ -27,10 +27,10 @@ export const setActiveProfile = (profile) => (dispatch, getState) => {
 }
 
 // update a profile
-export const updateProfile = (id, profile) => (dispatch, getState) => {
+export const updateProfile = (profile) => (dispatch, getState) => {
     dispatch({
         type: UPDATE_PROFILE,
-        data: {'id':id, 'profile': profile}
+        data: profile
     })
 }
 

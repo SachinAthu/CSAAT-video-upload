@@ -2,13 +2,14 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from api.models import Videos
+from api.models import Videos, Sessions
 from api.serializers import VideosSerializer
 
 # get all videos for a session
 @api_view(['GET'])
-def sessionVideos(request, sessionPK):
-    video_list = Videos.objects.filter(session__exact=sessionPK)
+def sessionVideos(request, pk):
+    session = Sessions.objects.get(id=pk)
+    video_list = Videos.objects.filter(session__exact=session)
     serializer = VideosSerializer(video_list, many=True)
     return Response(serializer.data)
 
