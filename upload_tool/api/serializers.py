@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Profiles, Sessions, Cameras, Videos, VideoClips
+from .models import Profiles, Sessions, Cameras, CameraAngles, Videos, VideoClips
 
 class ProfilesSerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,6 +15,11 @@ class SessionsSerializer(serializers.ModelSerializer):
 class CamerasSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cameras
+        fields = '__all__'
+
+class CameraAngleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CameraAngles
         fields = '__all__'
 
 class VideosSerializer(serializers.ModelSerializer):

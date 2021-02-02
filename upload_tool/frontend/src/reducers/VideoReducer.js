@@ -1,11 +1,14 @@
 import {
     FETCH_VIDEOS,
     ADD_VIDEO,
-    DELETE_VIDEO
+    DELETE_VIDEO,
+    ADD_TEMP_VIDEO,
+    DELETE_TEMP_VIDEO,
   } from "../actions/Types";
   
   const initialState = {
     videos: [],
+    tempVideos: [],
   };
   
   export default function (state = initialState, action) {
@@ -17,20 +20,24 @@ import {
         };
   
       case ADD_VIDEO:
-        let p = [...state.profiles];
-        p.unshift(action.data);
-        return {
-          ...state,
-          profiles: p,
-        };
   
       case DELETE_VIDEO:
+
+      case ADD_TEMP_VIDEO:
+        let v = [...state.tempVideos];
+        v.push(action.data);
         return {
           ...state,
-          videos: state.videos.filter(
+          tempVideos: v,
+        };
+
+      case DELETE_TEMP_VIDEO:
+        return{
+          ...state,
+          tempVideos: state.tempVideos.filter(
             (video) => video.id !== action.data
           ),
-        };
+        }
   
       default:
         return state;

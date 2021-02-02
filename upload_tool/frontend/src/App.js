@@ -9,6 +9,7 @@ import Footer from "./components/layout/footer/Footer";
 import Profiles from "./components/profiles/Profiles";
 import store from "./store";
 import ProfilePage from './components/profilePage/ProfilePage'
+import AddSession from './components/addSession/AddSession'
 
 class App extends Component {
   render() {
@@ -25,6 +26,7 @@ class App extends Component {
                 <Switch>
                   <Route exact path="/" component={Profiles} />
                   <Route exact path="/profile_detail" component={ProfilePage}/>
+                  <Route exact path="/add_session" component={AddSession}/>
                 </Switch>
               </div>
 

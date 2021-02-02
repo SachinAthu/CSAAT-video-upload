@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from django.core.files.storage import default_storage
 
 from api.models import Videos, Sessions
 from api.serializers import VideosSerializer
@@ -23,6 +24,9 @@ def addVideo(request):
         ##
         serializer.save()
 
+    else:
+        print(serializer.errors)
+
     return Response(serializer.data)
 
 # edit a video
@@ -35,6 +39,8 @@ def updateVideo(request, pk):
         # should create a thumbnail before save if video changed
         ##
         serializer.save()
+    else:
+        print(serializer.errors)
 
     return Response(serializer.data)
 
@@ -42,13 +48,41 @@ def updateVideo(request, pk):
 @api_view(['DELETE'])
 def deleteVideo(request, pk):
     video = Videos.objects.get(id=pk)
-    video.delete()
+    res = ''
 
-    return Response('Video was deleted')
+    try:
+        video.delete()
+        res += 'Video record was deleted. '
+        if video.video:
+            if default_storage.exists(video.video.path):
+                default_storage.delete(video.video.path)
+                res += 'Video file was deleted. '
+        if video.thumbnail:
+            if default_storage.exists(video.thumbnail.path):
+                default_storage.delete(video.thumbnail.path)
+                res += 'Video thumbnail was deleted. '
+    except:
+        res = 'error, something went wrong!'
+
+    return Response(res)
 
 # delete all videos
 @api_view(['DELETE'])
 def deleteVideos(request):
-    Videos.objects.all().delete()
+    videos = Videos.objects.all()
+    res = ''
+    
+    try:
+        for v in videos:
+            v.delete()
+            if v.video:
+                if default_storage.exists(v.video.path):
+                    default_storage.delete(v.video.path)
+            if v.thumbnail:
+                if default_storage.exists(v.thumbnail.path):
+                    default_storage.delete(v.thumbnail.path)
+        res = 'All Videos were deleted(records, files, thumbnails)'
+    except:
+        res = 'error, something went wrong!'
 
-    return Response('All Videos were deleted')
+    return Response(res)

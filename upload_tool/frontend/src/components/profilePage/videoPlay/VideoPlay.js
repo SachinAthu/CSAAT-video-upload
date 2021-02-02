@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import styles from "./VideoPlay.module.css";
-import Player from "./Player/Player";
+import Player from "../../Player/Player";
 
 class VideoPlay extends Component {
   static propTypes = {

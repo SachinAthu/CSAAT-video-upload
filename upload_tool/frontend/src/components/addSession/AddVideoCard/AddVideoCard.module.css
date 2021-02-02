@@ -1,0 +1,50 @@
+.container{
+    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.1);
+    min-height: 18rem;
+}
+
+.info{
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info > span{
+    font-size: 0.8rem;
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: 400;
+}
+
+.info > button{
+    background-color: #fff;
+}
+
+.info > button{
+    fill: var(--color-danger);
+    transform: scale(1);
+}
+
+.empty{
+    width: 100%;
+    height: 18rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.empty button{
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0 2px 15px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
+}
+
+.empty button svg{
+    fill: var(--color-primary);
+    transform: scale(1.8);
+}

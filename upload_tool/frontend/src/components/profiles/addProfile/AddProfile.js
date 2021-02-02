@@ -6,6 +6,9 @@ import { connect } from "react-redux";
 import styles from "./AddProfile.module.css";
 import { addProfile, updateProfile } from "../../../actions/ProfileActions";
 
+axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+
 export class AddProfile extends Component {
   static propTypes = {
     addProfile: PropTypes.func.isRequired,

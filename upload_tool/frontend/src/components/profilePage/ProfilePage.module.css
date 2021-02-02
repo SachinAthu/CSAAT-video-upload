@@ -53,10 +53,14 @@
     
 }
 
-.sessions_div1 {
+.sessions_div1,
+.sessions_div2 {
     display: flex;
     align-items: center;
-    margin-bottom: 60px;
+}
+
+.sessions_div1{
+  margin-bottom: 60px;
 }
 
 .sessions_div1 span {

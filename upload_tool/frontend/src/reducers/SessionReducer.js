@@ -2,6 +2,7 @@ import {
     FETCH_SESSIONS,
     ADD_SESSION,
     SET_ACTIVE_SESSION,
+    UPDATE_SESSION,
     DELETE_SESSION,
   } from "../actions/Types";
   
@@ -19,6 +20,29 @@ import {
         };
   
       case ADD_SESSION:
+        let s = [...state.sessions];
+        s.unshift(action.data);
+        return {
+          ...state,
+          sessions: s,
+        };
+
+      case UPDATE_SESSION:
+        const tempSessions = [...state.sessions]
+        const updatedSession = action.data
+
+        tempSessions.forEach((s, i) => {
+          if(s.id === updatedSession.id){
+            p.datetime = updatedSession.datetime
+            p.profile = updatedSession.profile
+            p.user = updatedSession.user
+          }
+        })
+
+        return {
+          ...state,
+          sessions: tempSessions
+        }
   
       case SET_ACTIVE_SESSION:
         return {

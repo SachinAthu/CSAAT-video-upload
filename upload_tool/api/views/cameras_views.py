@@ -2,8 +2,8 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from api.models import Cameras
-from api.serializers import CamerasSerializer
+from api.models import Cameras, CameraAngles
+from api.serializers import CamerasSerializer, CameraAngleSerializer
 
 # get all cameras
 @api_view(['GET'])
@@ -54,3 +54,11 @@ def deleteCameras(request):
     Cameras.objects.all().delete()
 
     return Response('All Cameras were deleted')
+
+
+# get all camera angles
+@api_view(['GET'])
+def cameraAngles(request):
+    camera_angle_list = CameraAngles.objects.all().order_by('name')
+    serializer = CameraAngleSerializer(camera_angle_list, many=True)
+    return Response(serializer.data)

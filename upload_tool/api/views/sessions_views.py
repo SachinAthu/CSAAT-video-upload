@@ -24,8 +24,26 @@ def session(request, pk):
 def addSession(request):
     serializer = SessionsSerializer(data=request.data)
 
+    print('called session')
+    print(request.data)
+
     if serializer.is_valid():
         serializer.save()
+    else:
+        print(serializer.errors)
+
+    return Response(serializer.data)
+
+# edit a session
+@api_view(['PUT'])
+def updateSession(request, pk):
+    session = Sessions.objects.get(id=pk)
+    serializer = SessionsSerializer(data=request.data, instance=session)
+    
+    if serializer.is_valid():
+        serializer.save()
+    else:
+        print(serializer.errors)
 
     return Response(serializer.data)
 

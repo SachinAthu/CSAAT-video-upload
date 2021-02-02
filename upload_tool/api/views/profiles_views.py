@@ -27,7 +27,8 @@ def addProfile(request):
 
     if serializer.is_valid():
         serializer.save()
-        print(serializer.data)
+    else:
+        print(serializer)
 
     return Response(serializer.data)
 
@@ -40,22 +41,13 @@ def updateProfile(request, pk):
     doc = profile.consent_doc
     doc_name = profile.consent_doc_name
 
-    if serializer.is_valid():
-        print('serializer valid')
-    else:
-        print('serializer not valid')
-
-    if doc and request.FILES.get('consent_doc'):
-        print('override')
-        # delete previous file
-        if default_storage.exists(doc.path):
-            default_storage.delete(doc.path)
-
-    if doc and request.FILES.get('consent_doc') is None:
-        # do not remove previous file
-        print(request.data)
-        if default_storage.exists(doc.path):
-            file = default_storage.open(doc.path, mode='rb')
+    try:
+        if doc and request.FILES.get('consent_doc'):
+            # delete previous file
+            if default_storage.exists(doc.path):
+                default_storage.delete(doc.path)
+    except:
+        print('error, previous consent doc deletion failed!')
 
     if serializer.is_valid():
         serializer.save()
@@ -68,24 +60,35 @@ def updateProfile(request, pk):
 @api_view(['DELETE'])
 def deleteProfile(request, pk):
     profile = Profiles.objects.get(id=pk)
+    res = ''
 
-    if profile.consent_doc:
-        if default_storage.exists(profile.consent_doc.path):
-            default_storage.delete(profile.consent_doc.path)
+    try:
+        profile.delete()
+        res += 'Profile record was deleted. '
+        if profile.consent_doc:
+            if default_storage.exists(profile.consent_doc.path):
+                default_storage.delete(profile.consent_doc.path)
+                res += 'Profile record was deleted. '
 
-    profile.delete()
+    except:
+        res = 'error, something went wrong!'
 
-    return Response('Profile was deleted')
+    return Response(res)
 
 # delete all profiles
 @api_view(['DELETE'])
 def deleteProfiles(request):
     profiles = Profiles.objects.all()
+    res = ''
 
-    for p in profiles:
-        if p.consent_doc:
-            if default_storage.exists(p.consent_doc.path):
-                default_storage.delete(path)
-        p.delete()
+    try:
+        for p in profiles:
+            p.delete()
+            if p.consent_doc:
+                if default_storage.exists(p.consent_doc.path):
+                    default_storage.delete(p.consent_doc.path)
+        res = 'All Profiles were deleted(records, consent docs)'
+    except:
+        res = 'error, something went wrong!'
 
-    return Response('All Profiles were deleted')
+    return Response(res)

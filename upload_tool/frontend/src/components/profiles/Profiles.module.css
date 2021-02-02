@@ -23,6 +23,11 @@
   border-radius: 3px 0 0 3px;
 }
 
+.form input:focus{
+  outline: none;
+  outline-style: none;
+}
+
 .form button {
   width: 5rem;
   height: 36px;

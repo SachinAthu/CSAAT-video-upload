@@ -2,6 +2,7 @@ import {
     FETCH_SESSIONS,
     ADD_SESSION,
     SET_ACTIVE_SESSION,
+    UPDATE_SESSION,
     DELETE_SESSION,
   } from "./Types";
   
@@ -24,9 +25,18 @@ export const addSession = (session) => (dispatch, getState) => {
 
 // set active session
 export const setActiveSession = (session) => (dispatch, getState) => {
-    console.log(session)
+    // console.log(session)
     dispatch({
         type: SET_ACTIVE_SESSION,
+        data: session
+    })
+}
+
+// update session
+export const updateSession = (session) => (dispatch, getState) => {
+    console.log(session)
+    dispatch({
+        type: UPDATE_SESSION,
         data: session
     })
 }

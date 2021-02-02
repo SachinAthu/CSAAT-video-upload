@@ -1,0 +1,46 @@
+.container {
+}
+
+.container h3 {
+  font-size: 1.8rem;
+  color: rgba(0, 0, 0, 0.8);
+  margin: 10px 0 70px 0;
+}
+
+.form {
+  margin-bottom: 70px;
+  display: flex;
+  align-items: center;
+}
+
+.form label {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.7);
+  margin-right: 10px;
+}
+
+.videoCards {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.videoCard {
+  flex: 1;
+  margin: 0 5px;
+}
+
+.submitbtn {
+  color: #fff;
+  background-color: var(--color-primary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  margin-left: auto;
+}
+
+.submitbtn:hover {
+  background-color: var(--color-primary-dark);
+}

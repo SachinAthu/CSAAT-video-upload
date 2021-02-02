@@ -15,6 +15,7 @@ urlpatterns = [
     path('sessions/<str:pk>/', sessions, name='sessions'),
     path('session/<str:pk>/', session, name='session'),
     path('add-session/', addSession, name='add-session'),
+    path('update-session/', updateSession, name='update-session'),
     path('delete-session/<str:pk>/', deleteSession, name='delete-session'),
     path('delete-sessions/', deleteSessions, name='delete-sessions'),
 
@@ -35,4 +36,6 @@ urlpatterns = [
     path('add-video-clip/', addVideoClip, name='add-video-clip'),
     path('delete-video-clip/<str:pk>/', deleteVideoClip, name='delete-video-clip'),
     path('delete-video-clips/', deleteVideoClips, name='delete-video-clips'),
+
+    path('camera-angles/', cameraAngles, name='camera-angles'),
 ]

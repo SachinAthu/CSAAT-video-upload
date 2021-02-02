@@ -28,7 +28,7 @@ class Player extends Component {
     };
 
     this.player = videojs(this.videoNode, videoJsOptions, function onPlayerReady() {
-      console.log("onPlayerReady", this);
+      // console.log("onPlayerReady", this);
     });
   }
 

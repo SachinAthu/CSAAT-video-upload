@@ -12,6 +12,9 @@ import {
 import { getVideos } from "../../actions/VideoActions";
 import VideoPlay from "./videoPlay/VideoPlay";
 
+axios.defaults.xsrfCookieName = 'csrftoken'
+axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+
 export class ProfilePage extends Component {
   static propTypes = {
     profile: PropTypes.object.isRequired,
@@ -66,23 +69,17 @@ export class ProfilePage extends Component {
 
   addSessionHandler = () => {
     // add session
-    const s = {
-        'datatime': '',
-        'profile': this.props.activeProfile,
-        'user': null
-    }
-    axios.post('add-session/', s, {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-    }).then(res => {
-        console.log(res.data)
-    }).catch(err => console.log(err))
+    axios.post("add-session/", this.props.profile.id)
+      .then((res) => {
+        // console.log(res.data)
+        // change active session
+        this.props.addSession(res.data)
+        this.props.setActiveSession(res.data);
 
-    // change active session
-
-    // navigate to add session component
-
+        // navigate to add session component
+        this.props.history.push("/add_session");
+      })
+      .catch((err) => console.log(err));
   };
 
   getTime = (datetime) => {
@@ -120,11 +117,21 @@ export class ProfilePage extends Component {
 
     const select = (
       <select name="sessions" id="session_list" onChange={this.onChangeSelect}>
-        {sessions.map((s, i) => (
-          <option key={i} value={s.id}>
-            {this.getTime(s.datetime)}
-          </option>
-        ))}
+        {sessions.map((s, i) => {
+          if (s.datetime) {
+            return (
+              <option key={i} value={s.id}>
+                {this.getTime(s.datetime)}
+              </option>
+            );
+          }else{
+            return (
+              <option key={i} value={s.id}>
+                No date & time mentioned
+              </option>
+            );
+          }
+        })}
       </select>
     );
 
@@ -176,7 +183,7 @@ export class ProfilePage extends Component {
 
           <div className={styles.sessions_div1}>
             {sessions.length > 0 ? (
-              <div>
+              <div className={styles.sessions_div2}>
                 <span>Select the session by date and time</span>
 
                 {select}
@@ -205,9 +212,9 @@ export class ProfilePage extends Component {
               <VideoPlay />
             </div>
           ) : (
-              <div className={styles.novideo}>
-                <h6>No available sessions</h6>
-              </div>
+            <div className={styles.novideo}>
+              <h6>No available sessions</h6>
+            </div>
           )}
         </div>
       </div>
